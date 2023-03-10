@@ -22,7 +22,10 @@ import (
 	"github.com/pkg/errors"
 
 	infrav1 "sigs.k8s.io/cluster-api-provider-aws/v2/api/v1beta2"
+	expinfrav1 "sigs.k8s.io/cluster-api-provider-aws/v2/exp/api/v1beta2"
 	"sigs.k8s.io/cluster-api-provider-aws/v2/pkg/logger"
+	clusterv1 "sigs.k8s.io/cluster-api/api/v1beta1"
+	expclusterv1 "sigs.k8s.io/cluster-api/exp/api/v1beta1"
 )
 
 var (
@@ -114,4 +117,9 @@ func (p *defaultSubnetPlacementStrategy) getSubnetsForAZs(azs []string, controlP
 	}
 
 	return subnetIDs, nil
+}
+
+func ReplicasExternallyManaged(mp *expclusterv1.MachinePool) bool {
+	val, ok := mp.Annotations[clusterv1.ReplicasManagedByAnnotation]
+	return ok && val == expinfrav1.ExternalAutoscalerReplicasManagedByAnnotationValue
 }

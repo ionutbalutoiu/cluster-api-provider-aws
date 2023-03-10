@@ -26,6 +26,10 @@ const (
 	// ExternalResourceGCAnnotation is the name of an annotation that indicates if
 	// external resources should be garbage collected for the cluster.
 	ExternalResourceGCAnnotation = "aws.cluster.x-k8s.io/external-resource-gc"
+
+	// ExternalAutoscalerReplicasManagedByAnnotationValue is used with the "cluster.x-k8s.io/replicas-managed-by" annotation
+	// to indicate an external autoscaler enforces replica count.
+	ExternalAutoscalerReplicasManagedByAnnotationValue = "external-autoscaler"
 )
 
 // EBS can be used to automatically set up EBS volumes when an instance is launched.

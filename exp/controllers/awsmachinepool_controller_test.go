@@ -371,7 +371,7 @@ func TestAWSMachinePoolReconciler(t *testing.T) {
 			ec2Svc.EXPECT().ReconcileTags(gomock.Any(), gomock.Any()).Return(nil).AnyTimes()
 
 			ms.MachinePool.Annotations = map[string]string{
-				scope.ReplicasManagedByAnnotation: scope.ExternalAutoscalerReplicasManagedByAnnotationValue,
+				clusterv1.ReplicasManagedByAnnotation: expinfrav1.ExternalAutoscalerReplicasManagedByAnnotationValue,
 			}
 			ms.MachinePool.Spec.Replicas = pointer.Int32(0)
 
@@ -786,7 +786,7 @@ func TestASGNeedsUpdates(t *testing.T) {
 					MachinePool: &expclusterv1.MachinePool{
 						ObjectMeta: metav1.ObjectMeta{
 							Annotations: map[string]string{
-								scope.ReplicasManagedByAnnotation: scope.ExternalAutoscalerReplicasManagedByAnnotationValue,
+								clusterv1.ReplicasManagedByAnnotation: expinfrav1.ExternalAutoscalerReplicasManagedByAnnotationValue,
 							},
 						},
 						Spec: expclusterv1.MachinePoolSpec{
